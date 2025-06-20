@@ -47,11 +47,6 @@ namespace Problem_3
             {
                 if (TryParseLogLine(logLine, out LogRecord? logRecord))
                 {
-                    if (logRecord is null)
-                    {
-                        throw new Exception();
-                    }
-
                     result.SuccessfullyParsedRecords.Add(logRecord);
                     continue;
                 }

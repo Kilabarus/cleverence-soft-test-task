@@ -43,7 +43,7 @@ namespace Problem_3.LogParsers
             bool timeIsValid = TimeOnly.TryParse(timeRaw, out _);
             bool logLevelIsValid = LogLevelParser.TryParse(levelRaw, out LogLevel logLevel);
 
-            if (!(dateIsValid && timeIsValid && logLevelIsValid))
+            if (!dateIsValid || !timeIsValid || !logLevelIsValid)
             {
                 return false;
             }
