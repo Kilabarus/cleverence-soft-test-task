@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Problem_3
+namespace Problem_3.LogRecordWriters
 {
-    internal interface ILogParser
+    internal interface ILogRecordWriter
     {
-        public bool TryParse(string logLine, out LogRecord? logRecord);
+        public void WriteLogRecords(IEnumerable<LogRecord> logRecords);
     }
 }

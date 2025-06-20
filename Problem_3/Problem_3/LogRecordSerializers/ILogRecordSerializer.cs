@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Problem_3
+namespace Problem_3.LogRecordSerializers
 {
-    internal interface ILogParser
+    internal interface ILogRecordSerializer
     {
-        public bool TryParse(string logLine, out LogRecord? logRecord);
+        public string Serialize(LogRecord logRecord);
     }
 }

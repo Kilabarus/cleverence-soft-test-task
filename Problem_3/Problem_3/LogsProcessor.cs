@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Problem_3.FailedToParseLogLinesWriter;
+using Problem_3.LogLinesGetters;
+using Problem_3.LogRecordWriters;
+using Problem_3.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,34 +10,35 @@ using System.Threading.Tasks;
 
 namespace Problem_3
 {
-    internal class LogFileProcessor
+    internal class LogsProcessor
     {
         private readonly IEnumerable<ILogParser> _parsers;
 
-        public LogFileProcessor(IEnumerable<ILogParser> parsers)
+        private readonly ILogLinesGetter _logLinesGetter;
+        private readonly ILogRecordWriter _logRecordWriter;
+        private readonly IFailedToParseLogLinesWriter _failedToParseLogLinesWriter;
+
+
+        public LogsProcessor(
+            IEnumerable<ILogParser> parsers,
+            ILogLinesGetter logLinesGetter,
+            ILogRecordWriter logRecordWriter,
+            IFailedToParseLogLinesWriter failedToParseLogLinesWriter)
         {
             _parsers = parsers;
+
+            _logLinesGetter = logLinesGetter;
+            _logRecordWriter = logRecordWriter;
+            _failedToParseLogLinesWriter = failedToParseLogLinesWriter;
         }
 
-        public void ProcessLogFile(string inputFilePath, string outputFilePath, string problemsFilePath)
+        public void ProcessLogFile(string outputFilePath, string problemsFilePath)
         {
-            IEnumerable<string> logLines = File.ReadAllLines(inputFilePath);
+            IEnumerable<string> logLines = _logLinesGetter.GetLogLines();
             LogParseResult logParseResult = ProcessLogLines(logLines);
 
-            WriteLogRecordsToFile(logParseResult.SuccessfullyParsedRecords, outputFilePath);
-            WriteStringsToFile(logParseResult.FailedToParseRecords, problemsFilePath);
-        }
-
-        private void WriteLogRecordsToFile(IEnumerable<LogRecord> logRecords, string filePath)
-        {
-            string fileContent = string.Join(Environment.NewLine, logRecords);
-            File.WriteAllText(filePath, fileContent);
-        }
-
-        private void WriteStringsToFile(IEnumerable<string> logLines, string filePath)
-        {
-            string fileContent = string.Join(Environment.NewLine, logLines);
-            File.WriteAllText(filePath, fileContent);
+            _logRecordWriter.WriteLogRecords(logParseResult.SuccessfullyParsedRecords);
+            _failedToParseLogLinesWriter.WriteLogLines(logParseResult.FailedToParseRecords);
         }
 
         private LogParseResult ProcessLogLines(IEnumerable<string> logLines)

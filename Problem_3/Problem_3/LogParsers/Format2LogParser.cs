@@ -1,4 +1,5 @@
-﻿using Problem_3.RegexBuilders;
+﻿using Problem_3.Model;
+using Problem_3.RegexBuilders;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

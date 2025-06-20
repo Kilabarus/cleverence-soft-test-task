@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Problem_3
+namespace Problem_3.LogLinesGetters
 {
-    internal enum LogLevel
+    internal interface ILogLinesGetter
     {
-        Information,
-        Warning,
-        Error,
-        Debug
+        public IEnumerable<string> GetLogLines();
     }
 }
