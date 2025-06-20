@@ -10,15 +10,17 @@ namespace Problem_3.LogParsers
         private readonly Regex _regex;
         private readonly RegexGroupNames _groupNames;
 
+        private const string DATE_FORMAT = "dd.MM.yyyy";
+
         public Format1LogParser(IRegexBuilder regexBuilder)
         {
             _regex = regexBuilder.Build();
             _groupNames = regexBuilder.GetGroupNames();
         }
 
-        public bool TryParse(string logLine, out LogRecord? logRecord)
+        public bool TryParse(string logLine, out LogRecord logRecord)
         {
-            logRecord = null;
+            logRecord = new();
 
             Match match = _regex.Match(logLine);
             if (!match.Success)
@@ -33,12 +35,12 @@ namespace Problem_3.LogParsers
 
             bool dateIsValid = DateOnly.TryParseExact(
                 dateRaw,
-                "dd.MM.yyyy",
+                DATE_FORMAT,
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None,
                 out DateOnly date);
 
-            bool timeIsValid = TimeOnly.TryParse(timeRaw, out TimeOnly time);
+            bool timeIsValid = TimeOnly.TryParse(timeRaw, out _);
             bool logLevelIsValid = LogLevelParser.TryParse(levelRaw, out LogLevel logLevel);
 
             if (!(dateIsValid && timeIsValid && logLevelIsValid))

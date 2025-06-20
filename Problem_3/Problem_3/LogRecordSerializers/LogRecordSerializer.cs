@@ -1,9 +1,4 @@
 ﻿using Problem_3.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Problem_3.LogRecordSerializers
 {
@@ -11,13 +6,14 @@ namespace Problem_3.LogRecordSerializers
     {
         private const string SEPARATOR = "\t";
         private const string DATE_FORMAT = "dd-MM-yyyy";
+        private const string DEFAULT_CALLED_METHOD = "DEFAULT";
 
         public string Serialize(LogRecord logRecord)
         {
             string dateString = logRecord.Date.ToString(DATE_FORMAT);
             string logLevelString = SerializeLogLevel(logRecord.LogLevel);
-            string calledMethod = logRecord.CalledMethod is null 
-                ? "DEFAULT"
+            string calledMethod = logRecord.CalledMethod is null
+                ? DEFAULT_CALLED_METHOD
                 : logRecord.CalledMethod;
 
             return $"{dateString}{SEPARATOR}" +

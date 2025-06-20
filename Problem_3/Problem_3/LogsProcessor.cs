@@ -2,11 +2,6 @@
 using Problem_3.LogLinesGetters;
 using Problem_3.LogRecordWriters;
 using Problem_3.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Problem_3
 {
@@ -17,7 +12,6 @@ namespace Problem_3
         private readonly ILogLinesGetter _logLinesGetter;
         private readonly ILogRecordWriter _logRecordWriter;
         private readonly IFailedToParseLogLinesWriter _failedToParseLogLinesWriter;
-
 
         public LogsProcessor(
             IEnumerable<ILogParser> parsers,
@@ -32,16 +26,20 @@ namespace Problem_3
             _failedToParseLogLinesWriter = failedToParseLogLinesWriter;
         }
 
-        public void ProcessLogFile(string outputFilePath, string problemsFilePath)
+        public void ProcessLogFile()
         {
             IEnumerable<string> logLines = _logLinesGetter.GetLogLines();
-            LogParseResult logParseResult = ProcessLogLines(logLines);
+            LogParseResult logParseResult = TryParseUsingAvailableParsers(logLines);
 
             _logRecordWriter.WriteLogRecords(logParseResult.SuccessfullyParsedRecords);
-            _failedToParseLogLinesWriter.WriteLogLines(logParseResult.FailedToParseRecords);
+
+            if (logParseResult.FailedToParseRecords.Count > 0)
+            {
+                _failedToParseLogLinesWriter.WriteLogLines(logParseResult.FailedToParseRecords);
+            }
         }
 
-        private LogParseResult ProcessLogLines(IEnumerable<string> logLines)
+        private LogParseResult TryParseUsingAvailableParsers(IEnumerable<string> logLines)
         {
             LogParseResult result = new();
 
@@ -64,7 +62,7 @@ namespace Problem_3
             return result;
         }
 
-        private bool TryParseLogLine(string logLine, out LogRecord? logRecord)
+        private bool TryParseLogLine(string logLine, out LogRecord logRecord)
         {
             foreach (var parser in _parsers)
             {
@@ -74,7 +72,7 @@ namespace Problem_3
                 }
             }
 
-            logRecord = null;
+            logRecord = new();
             return false;
         }
     }

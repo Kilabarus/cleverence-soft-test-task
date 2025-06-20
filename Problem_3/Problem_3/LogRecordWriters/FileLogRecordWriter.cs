@@ -1,10 +1,5 @@
 ﻿using Problem_3.LogRecordSerializers;
 using Problem_3.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Problem_3.LogRecordWriters
 {
@@ -23,9 +18,7 @@ namespace Problem_3.LogRecordWriters
         public void WriteLogRecords(IEnumerable<LogRecord> logRecords)
         {
             IEnumerable<string> logRecordsStrings = logRecords.Select(_logRecordSerializer.Serialize);
-            string output = string.Join(Environment.NewLine, logRecordsStrings);
-
-            File.WriteAllText(_filePath, output);
+            File.WriteAllLines(_filePath, logRecordsStrings);
         }
     }
 }

@@ -1,11 +1,4 @@
-﻿using Problem_3.LogRecordSerializers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Problem_3.FailedToParseLogLinesWriter
+﻿namespace Problem_3.FailedToParseLogLinesWriter
 {
     internal class FailedToParseLogLinesWriter : IFailedToParseLogLinesWriter
     {
@@ -17,7 +10,7 @@ namespace Problem_3.FailedToParseLogLinesWriter
         }
 
         public void WriteLogLines(IEnumerable<string> logLines)
-        {            
+        {
             File.WriteAllLines(_filePath, logLines);
         }
     }

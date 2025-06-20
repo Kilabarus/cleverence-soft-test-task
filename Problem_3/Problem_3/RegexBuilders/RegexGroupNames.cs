@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Problem_3.RegexBuilders
+﻿namespace Problem_3.RegexBuilders
 {
-    internal class RegexGroupNames
+    internal readonly struct RegexGroupNames
     {
-        public required string Date { get; init; }
-        public required string Time { get; init; }
-        public required string LogLevel { get; init; }
-        public required string Message { get; init; }
+        public string Date { get; init; }
+        public string Time { get; init; }
+        public string LogLevel { get; init; }
+        public string Message { get; init; }
         public string? CalledMethod { get; init; }
     }
 }
