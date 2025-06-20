@@ -1,4 +1,5 @@
-﻿using Problem_3.Model;
+﻿using Problem_3.Exceptions;
+using Problem_3.Model;
 
 namespace Problem_3.LogRecordSerializers
 {
@@ -31,7 +32,7 @@ namespace Problem_3.LogRecordSerializers
                 LogLevel.Warning => "WARN",
                 LogLevel.Error => "ERROR",
                 LogLevel.Debug => "DEBUG",
-                _ => throw new Exception(),
+                _ => throw new UnknownLogLevelSerializationException(logLevel),
             };
         }
     }

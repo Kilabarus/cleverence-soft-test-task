@@ -1,11 +1,6 @@
 ﻿using Problem_3.LogParsers;
 using Problem_3.Model;
 using Problem_3.RegexBuilders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Problem_3_Tests
 {

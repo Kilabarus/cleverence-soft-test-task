@@ -10,7 +10,7 @@
 
         public override bool Equals(object? obj)
         {
-            return obj is LogRecord record 
+            return obj is LogRecord record
                 && record.Date == Date
                 && record.TimeRaw == TimeRaw
                 && record.LogLevel == LogLevel

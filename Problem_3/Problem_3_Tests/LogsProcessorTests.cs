@@ -40,12 +40,12 @@ namespace Problem_3_Tests
 
             mockWriter.Verify(
                 w => w.WriteLogRecords(
-                    It.Is<List<LogRecord>>(r => r.Count == 1 && r[0] == validRecord)), 
+                    It.Is<List<LogRecord>>(r => r.Count == 1 && r[0] == validRecord)),
                 Times.Once);
-            
+
             mockFailedWriter.Verify(
                 w => w.WriteLogLines(
-                    It.Is<List<string>>(l => l.Count == 1 && l[0] == invalidLogLine)), 
+                    It.Is<List<string>>(l => l.Count == 1 && l[0] == invalidLogLine)),
                 Times.Once);
         }
     }

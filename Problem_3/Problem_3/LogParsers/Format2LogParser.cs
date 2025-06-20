@@ -1,4 +1,5 @@
-﻿using Problem_3.Model;
+﻿using Problem_3.Exceptions;
+using Problem_3.Model;
 using Problem_3.RegexBuilders;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -35,7 +36,7 @@ namespace Problem_3.LogParsers
 
             if (_groupNames.CalledMethod is null)
             {
-                throw new Exception();
+                throw new UndefinedCalledMethodRegexGroupNameException();
             }
             string calledMethod = match.Groups[_groupNames.CalledMethod].Value;
 
