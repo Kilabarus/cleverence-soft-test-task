@@ -11,5 +11,6 @@ namespace Problem_3
         public DateTime TimeStamp { get; init; }
         public required LogLevel LogLevel { get; init; }
         public required string Message { get; init; }
+        public string? CalledMethod { get; init; }
     }
 }
