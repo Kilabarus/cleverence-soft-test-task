@@ -17,9 +17,8 @@ namespace Problem_3.FailedToParseLogLinesWriter
         }
 
         public void WriteLogLines(IEnumerable<string> logLines)
-        {
-            string output = string.Join(Environment.NewLine, logLines);
-            File.WriteAllText(_filePath, output);
+        {            
+            File.WriteAllLines(_filePath, logLines);
         }
     }
 }
