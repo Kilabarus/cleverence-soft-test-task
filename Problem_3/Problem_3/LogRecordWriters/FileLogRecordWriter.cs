@@ -1,4 +1,6 @@
-﻿using Problem_3.LogRecordSerializers;
+﻿using Microsoft.Extensions.Options;
+using Problem_3.Configuration;
+using Problem_3.LogRecordSerializers;
 using Problem_3.Model;
 
 namespace Problem_3.LogRecordWriters
@@ -9,10 +11,10 @@ namespace Problem_3.LogRecordWriters
 
         private readonly string _filePath;
 
-        public FileLogRecordWriter(ILogRecordSerializer logRecordSerializer, string filePath)
+        public FileLogRecordWriter(ILogRecordSerializer logRecordSerializer, IOptions<LogProcessingOptions> options)
         {
             _logRecordSerializer = logRecordSerializer;
-            _filePath = filePath;
+            _filePath = options.Value.OutputFilePath;
         }
 
         public void WriteLogRecords(IEnumerable<LogRecord> logRecords)

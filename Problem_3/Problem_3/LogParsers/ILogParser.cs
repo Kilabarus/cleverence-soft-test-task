@@ -1,6 +1,6 @@
 ﻿using Problem_3.Model;
 
-namespace Problem_3
+namespace Problem_3.LogParsers
 {
     internal interface ILogParser
     {

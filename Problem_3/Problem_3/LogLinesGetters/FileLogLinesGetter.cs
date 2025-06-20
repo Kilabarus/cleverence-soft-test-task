@@ -1,12 +1,15 @@
-﻿namespace Problem_3.LogLinesGetters
+﻿using Microsoft.Extensions.Options;
+using Problem_3.Configuration;
+
+namespace Problem_3.LogLinesGetters
 {
     internal class FileLogLinesGetter : ILogLinesGetter
     {
         private readonly string _filePath;
 
-        public FileLogLinesGetter(string filePath)
+        public FileLogLinesGetter(IOptions<LogProcessingOptions> options)
         {
-            _filePath = filePath;
+            _filePath = options.Value.InputFilePath;
         }
 
         public IEnumerable<string> GetLogLines()

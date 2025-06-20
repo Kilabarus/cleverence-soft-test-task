@@ -1,7 +1,8 @@
 ﻿using Moq;
 using Problem_3;
-using Problem_3.FailedToParseLogLinesWriter;
+using Problem_3.FailedToParseLogLinesWriters;
 using Problem_3.LogLinesGetters;
+using Problem_3.LogParsers;
 using Problem_3.LogRecordWriters;
 using Problem_3.Model;
 

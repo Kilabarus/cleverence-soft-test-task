@@ -1,10 +1,17 @@
-﻿namespace Problem_3
+﻿using Microsoft.Extensions.DependencyInjection;
+using Problem_3.Configuration;
+
+namespace Problem_3
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Hello, World!");
+            var provider = ServiceConfigurator.Configure();
+
+            var processor = provider.GetRequiredService<LogsProcessor>();
+
+            processor.ProcessLogFile();
         }
     }
 }

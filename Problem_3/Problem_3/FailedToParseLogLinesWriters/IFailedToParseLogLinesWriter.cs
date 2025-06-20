@@ -1,4 +1,4 @@
-﻿namespace Problem_3.FailedToParseLogLinesWriter
+﻿namespace Problem_3.FailedToParseLogLinesWriters
 {
     internal interface IFailedToParseLogLinesWriter
     {
