@@ -12,21 +12,21 @@
         public static int GetCountDebug()
         {
             int threadId = Thread.CurrentThread.ManagedThreadId;
-            Console.WriteLine($"Поток №{threadId} (ЧТЕНИЕ): ожидание лока для чтения");
+            Console.WriteLine($"Чтение: ожидание лока");
 
-            lockSlim.EnterReadLock();
+            lockSlim.EnterReadLock();            
 
             try
             {
-                Console.WriteLine($"Поток №{threadId} (ЧТЕНИЕ): начало чтения");
+                Console.WriteLine($"Чтение: начало чтения");
                 Thread.Sleep(ReadDelayMs);
-                Console.WriteLine($"Поток №{threadId} (ЧТЕНИЕ): конец чтения");
+                Console.WriteLine($"Чтение: конец чтения, count = {count}");
 
                 return count;
             }
             finally
             {
-                Console.WriteLine($"Поток №{threadId} (ЧТЕНИЕ): освобождение лока для чтения");
+                Console.WriteLine($"Чтение: освобождение лока");
                 lockSlim.ExitReadLock();
             }
         }
@@ -34,20 +34,21 @@
         public static void AddToCountDebug(int value)
         {
             int threadId = Thread.CurrentThread.ManagedThreadId;
-            Console.WriteLine($"Поток №{threadId} (ЗАПИСЬ): ожидание лока для записи");
+            Console.WriteLine($" Запись: ожидание лока");
             lockSlim.EnterWriteLock();
 
             try
             {
-                Console.WriteLine($"Поток №{threadId} (ЗАПИСЬ): начало записи");
+                Console.WriteLine($" Запись: начало записи");
                 Thread.Sleep(WriteDelayMs);
-                Console.WriteLine($"Поток №{threadId} (ЗАПИСЬ): конец записи");
 
                 count += value;
+
+                Console.WriteLine($" Запись: конец записи, count = {count}");
             }
             finally
             {
-                Console.WriteLine($"Поток №{threadId} (ЗАПИСЬ): освобождение лока для записи");
+                Console.WriteLine($" Запись: освобождение лока");
                 lockSlim.ExitWriteLock();
             }
         }
