@@ -8,5 +8,8 @@ namespace Problem_3
 {
     internal class LogRecord
     {
+        public DateTime TimeStamp { get; init; }
+        public required LogLevel LogLevel { get; init; }
+        public required string Message { get; init; }
     }
 }
